@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Worth Thermostat Assessment — Reset Your Mind 1111™</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --gold: #C9A84C;
+    --gold-light: #E8C87A;
+    --purple: #3D1A6E;
+    --purple-light: #6B3FA0;
+    --white: #F9F6F0;
+    --rose: #C9748F;
+    --sage: #7A9E7E;
+    --muted: #888;
+    --card-bg: #111111;
+    --border: rgba(201,168,76,0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content:'';
+    position:fixed;
+    top:-50%; left:-50%;
+    width:200%; height:200%;
+    background: radial-gradient(ellipse at 20% 20%, rgba(61,26,110,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 50%);
+    pointer-events:none; z-index:0;
+  }
+  .container { max-width:720px; margin:0 auto; padding:0 20px; position:relative; z-index:1; }
+
+  /* HEADER */
+  .header { text-align:center; padding:48px 20px 32px; }
+  .logo {
+    width:160px; height:160px; border-radius:0;
+    border:none;
+    box-shadow:none;
+    margin:0 auto 20px; display:block; object-fit:contain;
+  }
+  .brand-tag { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; opacity:0.8; }
+  .header h1 { font-family:'Playfair Display',serif; font-size:clamp(30px,6vw,50px); color:var(--gold); line-height:1.1; margin-bottom:14px; }
+  .header p { font-size:15px; color:rgba(249,246,240,0.7); line-height:1.7; max-width:520px; margin:0 auto 8px; }
+  .divider-1111 { color:var(--gold); font-size:12px; letter-spacing:6px; opacity:0.4; margin:18px 0; }
+
+  /* SCREENS */
+  .screen { display:none; }
+  .screen.active { display:block; }
+
+  /* INTRO CARD */
+  .intro-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:20px; padding:40px; margin:0 0 40px;
+    box-shadow:0 0 40px rgba(201,168,76,0.08);
+  }
+  .intro-card h2 { font-family:'Playfair Display',serif; font-size:24px; color:var(--gold); margin-bottom:16px; }
+  .intro-card p { color:rgba(249,246,240,0.75); line-height:1.8; margin-bottom:16px; font-size:15px; }
+  .what-youll-discover {
+    background:rgba(61,26,110,0.3); border-left:3px solid var(--gold);
+    border-radius:0 12px 12px 0; padding:20px 24px; margin:24px 0;
+  }
+  .what-youll-discover h3 { font-family:'Playfair Display',serif; color:var(--gold); font-size:16px; margin-bottom:12px; }
+  .what-youll-discover ul { list-style:none; }
+  .what-youll-discover ul li { color:rgba(249,246,240,0.8); font-size:14px; padding:4px 0 4px 20px; position:relative; }
+  .what-youll-discover ul li::before { content:'✦'; position:absolute; left:0; color:var(--gold); font-size:10px; top:6px; }
+  .meta-info { display:flex; gap:24px; justify-content:center; margin:24px 0; flex-wrap:wrap; }
+  .meta-item { display:flex; align-items:center; gap:8px; color:rgba(249,246,240,0.6); font-size:13px; }
+  .meta-item .icon { color:var(--gold); font-size:16px; }
+
+  /* BUTTONS */
+  .btn-primary {
+    background:linear-gradient(135deg, var(--gold), #A8872E);
+    color:#0A0A0A; border:none; padding:18px 40px; border-radius:50px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:16px;
+    cursor:pointer; width:100%; transition:all 0.3s ease;
+    letter-spacing:0.5px; box-shadow:0 4px 20px rgba(201,168,76,0.3);
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary {
+    background:transparent; color:var(--gold); border:1px solid var(--gold);
+    padding:16px 40px; border-radius:50px; font-family:'Inter',sans-serif;
+    font-weight:500; font-size:15px; cursor:pointer; width:100%;
+    transition:all 0.3s ease; margin-top:12px;
+  }
+  .btn-secondary:hover { background:rgba(201,168,76,0.1); }
+
+  /* PROGRESS */
+  .progress-wrap { margin:0 0 28px; }
+  .progress-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .progress-label { font-size:12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
+  .progress-count { font-size:13px; color:var(--gold); font-weight:600; }
+  .progress-bar { height:4px; background:rgba(201,168,76,0.15); border-radius:4px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg, var(--purple-light), var(--gold)); border-radius:4px; transition:width 0.5s ease; }
+  .section-badge {
+    display:inline-block; background:rgba(61,26,110,0.5);
+    border:1px solid rgba(201,168,76,0.3); color:var(--gold);
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    padding:6px 16px; border-radius:20px; margin-bottom:20px;
+  }
+
+  /* QUESTION */
+  .question-card {
+    background:var(--card-bg); border:1px solid var(--border);
+    border-radius:20px; padding:36px; margin-bottom:20px;
+    box-shadow:0 0 40px rgba(201,168,76,0.06);
+    animation:fadeSlide 0.4s ease;
+  }
+  @keyframes fadeSlide { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  .question-stem { font-size:11px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
+  .question-text { font-family:'Playfair Display',serif; font-size:clamp(17px,3vw,21px); color:var(--white); line-height:1.5; margin-bottom:28px; }
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .option {
+    background:rgba(255,255,255,0.03); border:1px solid rgba(201,168,76,0.15);
+    border-radius:12px; padding:16px 20px; cursor:pointer; transition:all 0.25s ease;
+    display:flex; align-items:flex-start; gap:14px; text-align:left;
+  }
+  .option:hover { background:rgba(201,168,76,0.08); border-color:rgba(201,168,76,0.4); transform:translateX(4px); }
+  .option.selected { background:rgba(201,168,76,0.12); border-color:var(--gold); box-shadow:0 0 16px rgba(201,168,76,0.15); }
+  .option-letter {
+    width:28px; height:28px; border-radius:50%; border:1px solid rgba(201,168,76,0.4);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:600; color:var(--gold); flex-shrink:0; transition:all 0.25s ease;
+  }
+  .option.selected .option-letter { background:var(--gold); color:var(--bg); border-color:var(--gold); }
+  .option-text { font-size:14px; color:rgba(249,246,240,0.8); line-height:1.6; padding-top:4px; }
+  .option.selected .option-text { color:var(--white); }
+  .nav-buttons { display:flex; gap:12px; margin-top:8px; }
+  .btn-back {
+    background:transparent; border:1px solid rgba(201,168,76,0.3); color:var(--muted);
+    padding:14px 24px; border-radius:50px; cursor:pointer; font-size:14px;
+    transition:all 0.25s ease; flex-shrink:0;
+  }
+  .btn-back:hover { color:var(--gold); border-color:var(--gold); }
+  .btn-next {
+    background:linear-gradient(135deg, var(--gold), #A8872E); color:#0A0A0A;
+    border:none; padding:14px 32px; border-radius:50px; cursor:pointer;
+    font-weight:600; font-size:15px; flex:1; transition:all 0.3s ease;
+    opacity:0.4; pointer-events:none;
+  }
+  .btn-next.enabled { opacity:1; pointer-events:all; }
+  .btn-next.enabled:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(201,168,76,0.35); }
+
+  /* THERMOSTAT VISUAL */
+  .thermostat-wrap { text-align:center; margin:32px 0; }
+  .thermostat-circle {
+    width:170px; height:170px; border-radius:50%;
+    margin:0 auto 20px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    border:3px solid var(--gold);
+    box-shadow:0 0 50px rgba(201,168,76,0.35), inset 0 0 40px rgba(201,168,76,0.06);
+    animation:pulseGlow 3s ease-in-out infinite;
+    position:relative;
+  }
+  @keyframes pulseGlow {
+    0%,100%{box-shadow:0 0 40px rgba(201,168,76,0.3),inset 0 0 40px rgba(201,168,76,0.05)}
+    50%{box-shadow:0 0 70px rgba(201,168,76,0.55),inset 0 0 60px rgba(201,168,76,0.1)}
+  }
+  .thermo-score { font-family:'Playfair Display',serif; font-size:52px; color:var(--gold); line-height:1; }
+  .thermo-of { font-size:12px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-top:4px; }
+  .thermo-temp-label { font-size:12px; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:6px; }
+  .thermo-temp { font-family:'Playfair Display',serif; font-size:32px; color:var(--gold-light); }
+  .thermo-setting { font-size:13px; color:rgba(249,246,240,0.5); margin-top:4px; letter-spacing:1px; }
+
+  /* RESULT TYPE */
+  .result-type-title { font-family:'Playfair Display',serif; font-size:clamp(26px,5vw,40px); color:var(--gold); text-align:center; margin:8px 0 4px; }
+  .result-type-sub { text-align:center; color:rgba(249,246,240,0.5); font-size:13px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:28px; }
+
+  /* SUBSCORE BARS */
+  .subscores { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:28px; margin-bottom:20px; }
+  .subscores h3 { font-family:'Playfair Display',serif; color:var(--gold); font-size:18px; margin-bottom:20px; }
+  .subscore-item { margin-bottom:16px; }
+  .subscore-row { display:flex; justify-content:space-between; margin-bottom:6px; }
+  .subscore-name { font-size:13px; color:rgba(249,246,240,0.7); }
+  .subscore-val { font-size:13px; color:var(--gold); font-weight:600; }
+  .subscore-bar { height:6px; background:rgba(201,168,76,0.1); border-radius:6px; overflow:hidden; }
+  .subscore-fill { height:100%; border-radius:6px; transition:width 1s ease 0.3s; }
+
+  /* RESULT CARDS */
+  .result-card { background:var(--card-bg); border:1px solid var(--border); border-radius:16px; padding:28px; margin-bottom:16px; }
+  .result-card h3 { font-family:'Playfair Display',serif; color:var(--gold); font-size:18px; margin-bottom:12px; }
+  .result-card p { color:rgba(249,246,240,0.78); font-size:15px; line-height:1.8; }
+
+  /* EMAIL CAPTURE */
+  .email-capture {
+    background:linear-gradient(135deg,rgba(61,26,110,0.4),rgba(201,168,76,0.08));
+    border:1px solid rgba(201,168,76,0.3); border-radius:20px;
+    padding:36px; margin-bottom:20px; text-align:center;
+  }
+  .email-capture h2 { font-family:'Playfair Display',serif; color:var(--gold); font-size:24px; margin-bottom:12px; }
+  .email-capture p { color:rgba(249,246,240,0.7); font-size:14px; line-height:1.7; margin-bottom:24px; }
+  .form-group { margin-bottom:14px; text-align:left; }
+  .form-group label { display:block; font-size:12px; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+  .form-group input {
+    width:100%; background:rgba(255,255,255,0.05); border:1px solid rgba(201,168,76,0.25);
+    border-radius:10px; padding:14px 18px; color:var(--white);
+    font-family:'Inter',sans-serif; font-size:15px; outline:none; transition:border-color 0.25s;
+  }
+  .form-group input:focus { border-color:var(--gold); background:rgba(201,168,76,0.05); }
+  .form-group input::placeholder { color:rgba(249,246,240,0.3); }
+  .privacy-note { font-size:12px; color:var(--muted); margin-top:12px; }
+
+  /* CTA */
+  .cta-section {
+    background:linear-gradient(135deg,rgba(61,26,110,0.5),rgba(10,10,10,0.9));
+    border:1px solid rgba(201,168,76,0.3); border-radius:20px;
+    padding:40px; text-align:center; margin-bottom:40px;
+  }
+  .founding-badge {
+    display:inline-block; background:var(--gold); color:#0A0A0A;
+    font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    padding:6px 16px; border-radius:20px; margin-bottom:20px;
+  }
+  .cta-section h2 { font-family:'Playfair Display',serif; font-size:clamp(20px,4vw,28px); color:var(--white); margin-bottom:12px; line-height:1.3; }
+  .cta-section p { color:rgba(249,246,240,0.7); font-size:14px; line-height:1.7; margin-bottom:20px; }
+  .feature-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:24px; text-align:left; }
+  .feature-item { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(249,246,240,0.75); }
+  .feature-item::before { content:'✦'; color:var(--gold); font-size:10px; flex-shrink:0; }
+  .price-display { margin:16px 0; }
+  .price-display .price { font-family:'Playfair Display',serif; font-size:42px; color:var(--gold); }
+  .price-display .per { font-size:14px; color:var(--muted); }
+  .price-display .locked { font-size:12px; color:var(--sage); margin-top:4px; letter-spacing:1px; }
+  .spots-remaining { font-size:13px; color:var(--rose); margin-bottom:20px; font-weight:500; }
+
+  /* THANK YOU */
+  .thankyou-screen { text-align:center; padding:60px 20px; }
+  .thankyou-screen .check {
+    width:80px; height:80px; border-radius:50%;
+    background:rgba(201,168,76,0.15); border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 24px; font-size:32px; animation:popIn 0.5s ease;
+  }
+  @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+  .thankyou-screen h2 { font-family:'Playfair Display',serif; font-size:32px; color:var(--gold); margin-bottom:16px; }
+  .thankyou-screen p { color:rgba(249,246,240,0.7); font-size:15px; line-height:1.8; max-width:480px; margin:0 auto 24px; }
+
+  /* SHARE CARD */
+  .share-card {
+    background:linear-gradient(135deg, #1a0a2e, #0d0d0d);
+    border:2px solid var(--gold); border-radius:16px; padding:28px;
+    margin-bottom:16px; text-align:center;
+  }
+  .share-card p { color:rgba(249,246,240,0.6); font-size:13px; margin-bottom:16px; }
+  .btn-share {
+    background:transparent; border:1px solid var(--gold); color:var(--gold);
+    padding:12px 28px; border-radius:50px; cursor:pointer; font-size:14px;
+    font-family:'Inter',sans-serif; transition:all 0.25s ease;
+  }
+  .btn-share:hover { background:rgba(201,168,76,0.1); }
+
+  /* RETAKE */
+  .retake-link { text-align:center; margin:8px 0 40px; }
+  .retake-link a { color:var(--muted); font-size:13px; text-decoration:none; border-bottom:1px solid rgba(136,136,136,0.3); }
+  .retake-link a:hover { color:var(--gold); }
+
+  /* FOOTER */
+  .footer { text-align:center; padding:36px 20px; border-top:1px solid rgba(201,168,76,0.1); }
+  .footer p { font-size:12px; color:var(--muted); }
+  .footer a { color:var(--gold); text-decoration:none; }
+
+  @media(max-width:480px) {
+    .intro-card,.question-card,.result-card,.subscores,.email-capture,.cta-section{padding:22px 18px}
+    .feature-grid{grid-template-columns:1fr}
+    .nav-buttons{flex-direction:column}
+    .btn-back{order:2}
+  }
+</style>
+</head>
+<body>
+
+<!-- SCREEN 1: INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="header">
+    <img src="data:image/jpeg;base64,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" alt="Reset Your Mind 1111" class="logo">
+    <div class="brand-tag">The Emotional Surgeon™ Presents</div>
+    <h1>Worth Thermostat<br>Assessment™</h1>
+    <p>Discover where your Worth Thermostat is set — and learn how to recalibrate your life across the four areas that matter most.</p>
+    <div class="divider-1111">✦ 1 1 1 1 ✦</div>
+  </div>
+  <div class="container">
+    <div class="intro-card">
+      <h2>Stop Settling for Crumbs.</h2>
+      <p>Your worth thermostat is the internal setting that determines what you believe you deserve. It was set by the people who raised you, the relationships you experienced, and the messages you internalized about your value.</p>
+      <p>Most people's worth thermostats are set dangerously low — and they don't even know it. Today that changes.</p>
+      <div class="what-youll-discover">
+        <h3>In the next 3 minutes you'll discover — then receive your personalized reset plan in your inbox:</h3>
+        <ul>
+          <li>Exactly where your Worth Thermostat is currently set across Health, Wealth, Love and Leadership</li>
+          <li>Your scores across Love, Money, Career, Self-Care and Action</li>
+          <li>Your thermostat type and what it means for your life</li>
+          <li>Exactly what you need to begin your recalibration</li>
+        </ul>
+      </div>
+      <div class="meta-info">
+        <div class="meta-item"><span class="icon">✦</span> 25 questions</div>
+        <div class="meta-item"><span class="icon">✦</span> 3 minutes</div>
+        <div class="meta-item"><span class="icon">✦</span> 100% free</div>
+      </div>
+      <button class="btn-primary" onclick="startAssessment()">Take the Free Assessment →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 2: QUESTIONS -->
+<div id="screen-questions" class="screen">
+  <div class="container">
+    <div style="padding-top:40px">
+      <div class="progress-wrap">
+        <div class="progress-top">
+          <span class="progress-label">Worth Thermostat™</span>
+          <span class="progress-count" id="progress-count">1 of 25</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width:4%"></div>
+        </div>
+      </div>
+      <div id="section-badge" class="section-badge">Section 1 — Love & Relationships · LOVE Pillar</div>
+      <div class="question-card" id="question-card">
+        <div class="question-stem" id="question-stem">Question 1</div>
+        <div class="question-text" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-back" id="btn-back" onclick="prevQuestion()" style="display:none">← Back</button>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()">Continue →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 3: RESULTS -->
+<div id="screen-results" class="screen">
+  <div class="header">
+    <img src="data:image/jpeg;base64,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" alt="Reset Your Mind 1111" class="logo">
+    <div class="brand-tag">Your Worth Thermostat Results</div>
+    <div class="divider-1111">✦ 1 1 1 1 ✦</div>
+  </div>
+  <div class="container" style="padding-bottom:60px">
+
+    <div class="thermostat-wrap">
+      <div class="thermostat-circle">
+        <div class="thermo-score" id="result-score">72</div>
+        <div class="thermo-of">out of 125</div>
+      </div>
+      <div class="thermo-temp-label">Your thermostat is set to</div>
+      <div class="thermo-temp" id="result-percent">58%</div>
+      <div class="thermo-setting" id="result-setting">Thermostat set to Crumbs</div>
+    </div>
+
+    <div style="text-align:center; margin-bottom:28px;">
+      <div class="result-type-title" id="result-title">The Settler</div>
+      <div class="result-type-sub" id="result-subtitle">Score 25–45</div>
+    </div>
+
+    <div class="subscores">
+      <h3>Your Scores Across 5 Areas</h3>
+      <div id="subscore-bars"></div>
+    </div>
+
+    <div class="result-card">
+      <h3>What This Means</h3>
+      <p id="result-what-this-means"></p>
+    </div>
+
+    <div class="result-card">
+      <h3>The Good News</h3>
+      <p id="result-good-news"></p>
+    </div>
+
+    <div class="result-card">
+      <h3>Your Next Step</h3>
+      <p id="result-next-step"></p>
+    </div>
+
+    <!-- Share card -->
+    <div class="share-card">
+      <p>Share your Worth Thermostat result</p>
+      <button class="btn-share" onclick="shareResult()">📤 Share My Result</button>
+    </div>
+
+    <!-- Email Capture -->
+    <div class="email-capture">
+      <h2>Where Should We Send Your Personalized Reset Plan?</h2>
+      <p>Your results are on screen — now let us send your full personalized reset plan to your inbox. Includes what your result means for your health, wealth, love and leadership — and exactly what to do next.</p>
+      <p style="color:rgba(249,246,240,0.75);font-size:14px;line-height:1.7;margin-bottom:20px;">Enter your name and email to receive your complete Worth Thermostat results and personalized recalibration plan — delivered straight to your inbox.</p>
+      <form id="capture-form" onsubmit="submitForm(event)">
+        <div class="form-group">
+          <label style="display:block;font-size:12px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">First Name</label>
+          <input type="text" id="first-name" name="first_name" placeholder="Your first name" required style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:14px 18px;color:#F9F6F0;font-family:Inter,sans-serif;font-size:15px;outline:none;box-sizing:border-box;">
+        </div>
+        <div class="form-group" style="margin-top:12px;">
+          <label style="display:block;font-size:12px;color:#888;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.25);border-radius:10px;padding:14px 18px;color:#F9F6F0;font-family:Inter,sans-serif;font-size:15px;outline:none;box-sizing:border-box;">
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top:16px;">Send My Reset Plan →</button>
+        <p style="font-size:12px;color:#888;margin-top:12px;">🔒 No spam. Unsubscribe anytime. Your results are private.</p>
+      </form>
+      
+      
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <div class="founding-badge">⚡ Founding 111 — Limited Spots</div>
+      <h2>Ready to Raise Your Worth Thermostat?</h2>
+      <p>Reset Your Mind 1111™ gives you the exact tools to recalibrate your thermostat across all four pillars — starting today.
+
+✦ Health — Self-care, boundaries, nervous system and body
+✦ Wealth — Money mindset, career, purpose and abundance
+✦ Love — Relationships, attachment patterns and self-love
+✦ Leadership — Visibility, action, identity and manifestation</p>
+      <div class="feature-grid">
+        <div class="feature-item">Worth Thermostat Tracking</div>
+        <div class="feature-item">21 Healing Tools</div>
+        <div class="feature-item">Emotional Surgery™ Lessons</div>
+        <div class="feature-item">Nervous System Diagnostic</div>
+        <div class="feature-item">125 Permission Slips</div>
+        <div class="feature-item">3 Oracle Card Decks</div>
+        <div class="feature-item">Guided Meditations</div>
+        <div class="feature-item">30-Day Experience</div>
+      </div>
+      <div class="price-display">
+        <div class="price">$44<span style="font-size:20px">/mo</span></div>
+        <div class="per">Founding Member Price — Full Access</div>
+        <div class="locked">🔒 Locked in for life · Never goes up · Stay to keep your rate</div>
+      </div>
+      <div class="spots-remaining">⚡ Only 111 founding spots ever — worldwide. Once gone this price is gone forever.</div>
+      <a href="https://forms.gle/veohns8QVRKubMCm9" target="_blank" style="text-decoration:none">
+        <button class="btn-primary">Join the Founding Member Waitlist →</button>
+      </a>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px">Your $44 rate is yours for life — as long as you stay. Cancel anytime but note: if you cancel your Founding Member rate cannot be reinstated. No contracts.</p>
+    </div>
+
+    <div class="retake-link">
+      <a href="#" onclick="retakeAssessment(); return false;">↩ Retake the Assessment</a>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN 4: THANK YOU -->
+<div id="screen-thankyou" class="screen">
+  <div class="container">
+    <div class="thankyou-screen">
+      <div class="check">✓</div>
+      <h2>Permission Granted.</h2>
+      <p>Your personalized reset plan is being prepared. A new tab is opening now — enter your email there to receive your complete results and reset plan straight to your inbox. 🌡️</p>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:32px">Don't see it? Check your spam folder and mark us as safe.</p>
+      <a href="https://forms.gle/veohns8QVRKubMCm9" target="_blank" style="text-decoration:none">
+        <button class="btn-primary">Access the App Now →</button>
+      </a>
+      <button class="btn-secondary" onclick="retakeAssessment()">Retake Assessment</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="container">
+    <div class="divider-1111" style="margin-bottom:16px">✦ 1 1 1 1 ✦</div>
+    <p>© Reset Your Mind 1111™ · The Emotional Surgeon™ · Lorie Wu · All Rights Reserved</p>
+    <p style="margin-top:8px"><a href="https://forms.gle/veohns8QVRKubMCm9">Reset Your Mind 1111™</a></p>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// EXACT QUESTIONS FROM PROMPT 4 — Worth Thermostat Method™
+// ============================================================
+const sections = [
+  "Section 1 — Love & Relationships · LOVE Pillar","Section 1 — Love & Relationships · LOVE Pillar","Section 1 — Love & Relationships · LOVE Pillar","Section 1 — Love & Relationships · LOVE Pillar","Section 1 — Love & Relationships · LOVE Pillar",
+  "Section 2 — Money & Abundance · WEALTH Pillar","Section 2 — Money & Abundance · WEALTH Pillar","Section 2 — Money & Abundance · WEALTH Pillar","Section 2 — Money & Abundance · WEALTH Pillar","Section 2 — Money & Abundance · WEALTH Pillar",
+  "Section 3 — Career & Purpose · WEALTH Pillar","Section 3 — Career & Purpose · WEALTH Pillar","Section 3 — Career & Purpose · WEALTH Pillar","Section 3 — Career & Purpose · WEALTH Pillar","Section 3 — Career & Purpose · WEALTH Pillar",
+  "Section 4 — Self-Care & Boundaries · HEALTH Pillar","Section 4 — Self-Care & Boundaries · HEALTH Pillar","Section 4 — Self-Care & Boundaries · HEALTH Pillar","Section 4 — Self-Care & Boundaries · HEALTH Pillar","Section 4 — Self-Care & Boundaries · HEALTH Pillar",
+  "Section 5 — Action & Manifestation · LEADERSHIP Pillar","Section 5 — Action & Manifestation · LEADERSHIP Pillar","Section 5 — Action & Manifestation · LEADERSHIP Pillar","Section 5 — Action & Manifestation · LEADERSHIP Pillar","Section 5 — Action & Manifestation · LEADERSHIP Pillar"
+];
+
+const questions = [
+  { text: "When someone shows genuine interest in you your first instinct is:", options: ["To question what they really want or if there is a catch","To feel flattered but assume it will not last","To feel excited but nervous about being too much","To feel open and curious about the connection","To receive their interest as natural and deserved"] },
+  { text: "In relationships you tend to:", options: ["Give much more than you receive and feel drained","Keep your guard up and rarely let people see the real you","Alternate between being super giving and then pulling back","Give and receive in natural flow with healthy boundaries","Effortlessly maintain reciprocal secure connections"] },
+  { text: "When conflict arises with someone you care about:", options: ["You immediately assume you did something wrong","You shut down or withdraw to avoid confrontation","You try to fix everything and make everyone happy","You stay centered and communicate your needs clearly","You navigate conflict with confidence and emotional safety"] },
+  { text: "Your past relationships have mostly taught you:", options: ["That love always comes with pain and disappointment","That you have to be perfect to be loved","That you attract unavailable or wounded people","That healthy love is possible and you deserve it","That you naturally attract secure loving partnerships"] },
+  { text: "When someone treats you poorly:", options: ["You make excuses for them and blame yourself","You tolerate it longer than you should","You feel angry but struggle to set clear boundaries","You address it directly or remove yourself from the situation","You maintain your worth and expect respectful treatment always"] },
+  { text: "When you think about money you usually feel:", options: ["Anxious stressed or defeated","Guilty or ashamed about wanting more","Frustrated that others have it easier than you","Neutral and capable of managing it well","Abundant and confident in your ability to attract it"] },
+  { text: "When it comes to charging for your work or asking for a raise:", options: ["You undercharge or avoid asking altogether","You feel guilty charging what you are actually worth","You charge something but always feel nervous about it","You charge your worth and feel mostly comfortable","You confidently charge premium rates and people gladly pay"] },
+  { text: "Your spending habits reflect:", options: ["Scarcity — hoarding or deprivation","Chaos — overspending then restricting","People-pleasing — spending on others not yourself","Balance — enjoying money while saving responsibly","Abundance — flowing easily with generosity and joy"] },
+  { text: "When unexpected money comes in:", options: ["You worry about when it will run out","You feel you do not deserve it or it is a fluke","You immediately give it away or spend it on others","You receive it gratefully and use it wisely","You celebrate it as natural and expect more to come"] },
+  { text: "Financial opportunities feel:", options: ["Scary and you usually avoid them","Tempting but you talk yourself out of them","Exciting but you need others approval first","Manageable and you evaluate them clearly","Magnetic and you trust your intuition fully"] },
+  { text: "In your career or calling you:", options: ["Feel stuck invisible or undervalued","Work hard but feel like no one notices","Have skills but struggle to show up confidently","Feel aligned and are building momentum","Feel magnetic visible and in your power"] },
+  { text: "When it is time to promote yourself or your work:", options: ["You hide and hope someone discovers you","You feel uncomfortable and avoid self-promotion","You do it but minimize your achievements","You share your wins with healthy confidence","You celebrate your genius without apology"] },
+  { text: "Your relationship with visibility is:", options: ["Terrifying — you actively avoid being seen","Uncomfortable — you shrink to stay safe","Conflicted — you want it but fear judgment","Growing — you are learning to be seen authentically","Natural — you shine without dimming for others"] },
+  { text: "When you share your gifts or talents:", options: ["You downplay them or give them away for free","You wait for permission or validation first","You share but apologize or deflect praise","You share with confidence and receive appreciation","You share powerfully knowing your impact matters"] },
+  { text: "Your sense of purpose feels:", options: ["Lost unclear or overwhelming","Present but buried under obligations","Emerging but you doubt if it is enough","Clear and you are taking aligned action","Magnetic and naturally unfolding with ease"] },
+  { text: "When you need rest or time for yourself:", options: ["You feel guilty and push through exhaustion","You wait until you are burned out or sick","You take it but feel selfish doing so","You honor your needs without excessive guilt","You prioritize self-care as non-negotiable"] },
+  { text: "Your boundaries with others are:", options: ["Nonexistent — you say yes to everything","Weak — you set them but do not enforce them","Shaky — you enforce some but cave under pressure","Strong — you communicate and maintain them","Unshakable — you protect your energy fiercely"] },
+  { text: "When someone asks for your time or energy:", options: ["You immediately say yes even if it drains you","You want to say no but feel too guilty","You say yes then resent them later","You check in with yourself before responding","You honor your truth without guilt or explanation"] },
+  { text: "How you treat your body reflects:", options: ["Neglect — ignoring signals and needs","Punishment — harsh self-criticism","Inconsistency — caring for it only sometimes","Respect — honoring what it needs","Reverence — treating it as sacred"] },
+  { text: "Your self-talk sounds like:", options: ["Harsh criticism and constant judgment","Disappointment and frustration with yourself","Conditional — kind only when you earn it","Encouraging — like a supportive friend","Loving — like someone who adores you completely"] },
+  { text: "When you set goals you typically:", options: ["Do not set them because you expect to fail","Set them but abandon them when it gets hard","Set them but need constant external motivation","Set them and take consistent action toward them","Set them and watch them manifest with flow"] },
+  { text: "Your relationship with taking action is:", options: ["Paralyzed by fear or procrastination","Waiting for the perfect moment that never comes","Taking action but second-guessing every step","Moving forward with clarity and confidence","Taking bold aligned action that creates results"] },
+  { text: "When opportunities arise:", options: ["You assume there is a catch or it is too good to be true","You feel unworthy and let others take them instead","You consider them but talk yourself out of most","You evaluate them clearly and choose what aligns","You trust that perfect opportunities flow to you easily"] },
+  { text: "Your energy around your goals is:", options: ["Defeated before you start","Hopeful but realistic about limitations","Motivated but inconsistent in action","Determined and taking consistent steps","Magnetic and naturally manifesting outcomes"] },
+  { text: "Overall you believe:", options: ["Life is hard and good things do not happen to people like me","I have to work twice as hard as others to get half as much","I deserve good things but they require sacrifice and struggle","I am worthy of love success and abundance","I am a powerful creator who effortlessly attracts my desires"] }
+];
+
+// ============================================================
+// EXACT 5 OUTCOMES FROM PROMPT 4
+// ============================================================
+const results = [
+  {
+    range: [25, 45],
+    title: "The Settler",
+    subtitle: "Score 25–45",
+    setting: "Thermostat set to Crumbs (55–65 degrees)",
+    description: "Your worth thermostat is currently set very low. You have been conditioned to accept crumbs when you deserve celebration. You likely struggle with chronic underearning, toxic relationships, poor boundaries, and settling for far less than you are worth.",
+    whatThisMeans: "You question whether good things are meant for you. You make excuses for people who treat you poorly. You give more than you receive and feel drained. You downplay your gifts and hide your light.",
+    goodNews: "Recognition is the first step. Now that you know your thermostat is set to crumbs you can begin the recalibration. Your worth is not determined by your circumstances — it is your birthright.",
+    nextStep: "Begin with the Core Permission Granted meditation and your first Permission Slip from the Self-Worth category inside Reset Your Mind 1111™.",
+    color: "#C9748F"
+  },
+  {
+    range: [46, 65],
+    title: "The Seeker",
+    subtitle: "Score 46–65",
+    setting: "Thermostat set to Not Quite Enough (65–68 degrees)",
+    description: "Your worth thermostat is set below what you deserve but you are aware something needs to change. You are searching for validation outside yourself and struggle to fully claim your worth.",
+    whatThisMeans: "You attract people and opportunities that almost meet your needs. You second-guess your intuition and seek others' approval. You have flashes of confidence followed by self-doubt.",
+    goodNews: "You are in the perfect position for transformation. You are aware enough to know something is off but not so stuck you cannot shift. That awareness is everything.",
+    nextStep: "Start the Permission to Receive meditation and explore the Boundary Builder in Healing Tools inside Reset Your Mind 1111™.",
+    color: "#C9A84C"
+  },
+  {
+    range: [66, 85],
+    title: "The Boundary Builder",
+    subtitle: "Score 66–85",
+    setting: "Thermostat set to Getting Warmer (68–70 degrees)",
+    description: "Your worth thermostat is improving. You are learning to set boundaries and honor your needs but still struggle with guilt and inconsistency. You know your worth intellectually but embodying it fully is still a work in progress.",
+    whatThisMeans: "You set boundaries but sometimes cave under pressure. You celebrate wins but still minimize your gifts. You invest in yourself but feel guilty doing it.",
+    goodNews: "You are doing the work. Now it is time to fine-tune it and eliminate the remaining guilt and self-doubt that are keeping your thermostat from rising to full celebration.",
+    nextStep: "Explore the Money Story Audit and Shadow Work Library inside Reset Your Mind 1111™ to go deeper.",
+    color: "#7A9E7E"
+  },
+  {
+    range: [86, 105],
+    title: "The Rising Queen / King",
+    subtitle: "Score 86–105",
+    setting: "Thermostat set to Celebration (70–72 degrees)",
+    description: "Your worth thermostat is set to celebration. You know your worth, set strong boundaries, and attract relationships and opportunities that honor you. You still have moments of doubt but they are becoming less frequent.",
+    whatThisMeans: "You recognize your worth and expect others to honor it. You invest in yourself and your growth. You are becoming the person you were always meant to be.",
+    goodNews: "Your work now is to expand your capacity for receiving and step fully into leadership and visibility. You have done the inner work — now it is time to let the outer world reflect it.",
+    nextStep: "Try the Quantum Leap Abundance meditation and the Visibility Challenge Tracker inside Reset Your Mind 1111™.",
+    color: "#8A9BAE"
+  },
+  {
+    range: [106, 125],
+    title: "The Unapologetic",
+    subtitle: "Score 106–125",
+    setting: "Thermostat set to Full Celebration (72+ degrees)",
+    description: "Your worth thermostat is set to FULL celebration. You demand what you deserve and accept nothing less. You are operating at the highest level of self-worth and it shows in every area of your life.",
+    whatThisMeans: "You effortlessly attract relationships and opportunities that honor you. You trust your intuition completely. You are a magnet for abundance, love, and success.",
+    goodNews: "You have done the work. Now it is time to expand your impact and help others raise their thermostats. Your next chapter is about legacy and leadership.",
+    nextStep: "Begin the 30-Day Experience and share your results using the referral link inside Reset Your Mind 1111™.",
+    color: "#C9A84C"
+  }
+];
+
+const sectionNames = ["Love & Relationships (Love)","Money & Abundance (Wealth)","Career & Purpose (Wealth)","Self-Care & Boundaries (Health)","Action & Manifestation (Leadership)"];
+const barColors = ["#C9748F","#C9A84C","#7A9E7E","#8A9BAE","#6B3FA0"];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentQ = 0;
+let answers = new Array(25).fill(null);
+let sectionScores = [0,0,0,0,0];
+
+// ============================================================
+// FUNCTIONS
+// ============================================================
+function startAssessment() { showScreen('screen-questions'); renderQuestion(); }
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  const letters = ['A','B','C','D','E'];
+  document.getElementById('question-stem').textContent = `Question ${currentQ+1}`;
+  document.getElementById('question-text').textContent = q.text;
+  document.getElementById('section-badge').textContent = sections[currentQ];
+  document.getElementById('progress-count').textContent = `${currentQ+1} of 25`;
+  document.getElementById('progress-fill').style.width = `${((currentQ+1)/25)*100}%`;
+  const container = document.getElementById('options-container');
+  container.innerHTML = '';
+  q.options.forEach((opt,i) => {
+    const div = document.createElement('div');
+    div.className = 'option' + (answers[currentQ]===i ? ' selected' : '');
+    div.innerHTML = `<div class="option-letter">${letters[i]}</div><div class="option-text">${opt}</div>`;
+    div.onclick = () => selectOption(i);
+    container.appendChild(div);
+  });
+  document.getElementById('btn-back').style.display = currentQ>0 ? 'block' : 'none';
+  updateNextBtn();
+  const card = document.getElementById('question-card');
+  card.style.animation='none'; card.offsetHeight; card.style.animation='fadeSlide 0.4s ease';
+}
+
+function selectOption(index) {
+  answers[currentQ] = index;
+  document.querySelectorAll('.option').forEach((el,i) => el.classList.toggle('selected', i===index));
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const btn = document.getElementById('btn-next');
+  btn.classList.toggle('enabled', answers[currentQ]!==null);
+  btn.textContent = currentQ===24 ? 'Reveal My Results →' : 'Continue →';
+}
+
+function nextQuestion() {
+  if (answers[currentQ]===null) return;
+  if (currentQ===24) { calculateResults(); return; }
+  currentQ++; renderQuestion();
+}
+
+function prevQuestion() { if(currentQ>0){currentQ--;renderQuestion();} }
+
+function calculateResults() {
+  let total = 0;
+  sectionScores = [0,0,0,0,0];
+  answers.forEach((ans,i) => {
+    const pts = (ans||0)+1;
+    total += pts;
+    sectionScores[Math.floor(i/5)] += pts;
+  });
+  const result = results.find(r => total>=r.range[0] && total<=r.range[1]) || results[results.length-1];
+  const percent = Math.round((total/125)*100);
+
+  document.getElementById('result-score').textContent = total;
+  document.getElementById('result-percent').textContent = percent + '%';
+  document.getElementById('result-setting').textContent = result.setting;
+  document.getElementById('result-title').textContent = result.title;
+  document.getElementById('result-subtitle').textContent = result.subtitle;
+  document.getElementById('result-what-this-means').textContent = result.whatThisMeans;
+  document.getElementById('result-good-news').textContent = result.goodNews;
+  document.getElementById('result-next-step').textContent = result.nextStep;
+
+  // Sub-score bars
+  const barsContainer = document.getElementById('subscore-bars');
+  barsContainer.innerHTML = '';
+  sectionScores.forEach((score,i) => {
+    const pct = Math.round((score/25)*100);
+    barsContainer.innerHTML += `
+      <div class="subscore-item">
+        <div class="subscore-row">
+          <span class="subscore-name">${sectionNames[i]}</span>
+          <span class="subscore-val">${score}/25</span>
+        </div>
+        <div class="subscore-bar">
+          <div class="subscore-fill" style="width:0%;background:${barColors[i]}" data-width="${pct}%"></div>
+        </div>
+      </div>`;
+  });
+
+  window._assessmentResult = { total, percent, type: result.title, setting: result.setting, sectionScores };
+  showScreen('screen-results');
+  setTimeout(() => {
+    document.querySelectorAll('.subscore-fill').forEach(bar => { bar.style.width = bar.dataset.width; });
+  }, 300);
+}
+
+function shareResult() {
+  const r = window._assessmentResult;
+  if (!r) return;
+  const text = `I just took the Worth Thermostat Assessment™ by The Emotional Surgeon™ and I'm ${r.type} — ${r.percent}% thermostat setting. Find out where YOUR worth thermostat is set: https://forms.gle/veohns8QVRKubMCm9`;
+  if (navigator.share) {
+    navigator.share({ title: 'My Worth Thermostat Result', text });
+  } else {
+    navigator.clipboard.writeText(text).then(() => alert('Result copied to clipboard — paste it anywhere!'));
+  }
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  var firstName = document.getElementById('first-name').value;
+  var email = document.getElementById('email').value;
+  var r = window._assessmentResult || {};
+  var formData = new FormData();
+  formData.append('access_key', 'eaec5461-39e9-484e-af1c-1692f1a7054f');
+  formData.append('subject', 'New Worth Thermostat Result — Reset Your Mind 1111');
+  formData.append('name', firstName);
+  formData.append('email', email);
+  formData.append('thermostat_type', r.type || 'Not recorded');
+  formData.append('total_score', r.total || 'Not recorded');
+  formData.append('percentage', (r.percent || 0) + '%');
+  if (r.sectionScores) {
+    formData.append('love_score', r.sectionScores[0] + '/25');
+    formData.append('money_score', r.sectionScores[1] + '/25');
+    formData.append('career_score', r.sectionScores[2] + '/25');
+    formData.append('selfcare_score', r.sectionScores[3] + '/25');
+    formData.append('action_score', r.sectionScores[4] + '/25');
+  }
+  fetch('https://api.web3forms.com/submit', {method:'POST',body:formData}).catch(function(){});
+  showScreen('screen-thankyou');
+  setTimeout(function() {
+    window.open('https://preview.mailerlite.io/forms/2196162/182111259097826304/share', '_blank');
+  }, 2000);
+}
+
+function retakeAssessment() {
+  currentQ=0; answers=new Array(25).fill(null); sectionScores=[0,0,0,0,0];
+  showScreen('screen-intro');
+}
+</script>
+</body>
+</html>
